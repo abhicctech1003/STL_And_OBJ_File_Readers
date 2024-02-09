@@ -1,24 +1,38 @@
 #include "..\headers\Triangulation.h"
-#include<map>
-#include<vector>
-#include<iostream>
+#include <map>
+#include <vector>
+#include <iostream>
 
 
-Triangulation::Triangulation()
+// Initialization of static member instance for singleton class
+Triangulation Triangulation::instance;
+
+// Static method for accessing the singleton instance
+Triangulation& Triangulation::getInstance() 
+{
+    return instance;
+}
+
+// To prevent outside initialization private constructor
+Triangulation::Triangulation() 
 {
 
 }
-Triangulation::~Triangulation()
+
+Triangulation::~Triangulation() 
 {
-    
+
 }
 
-vector<Triangle> & Triangulation::triangles()
+// triangles getter method 
+std::vector<Triangle>& Triangulation::triangles()
 {
     return mTriangles;
 }
 
-vector<Point3D> & Triangulation::uniquePoints()
+// To get reference vector of triangles
+std::vector<Point3D>& Triangulation::uniquePoints()
 {
     return mUniquePoints;
 }
+

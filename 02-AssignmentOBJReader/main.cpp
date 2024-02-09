@@ -1,19 +1,22 @@
-#include<iostream>
-#include"./headers/Point3D.h"
-#include"./headers/Triangulation.h"
-#include"./headers/Triangle.h"
-#include"./headers/ObjReader.h"
-#include"./headers/ObjWriter.h"
-using namespace std;
+#include <iostream>
+#include "./headers/Point3D.h"
+#include "./headers/Triangulation.h"
+#include "./headers/Triangle.h"
+#include "./headers/ObjReader.h"
+#include "./headers/ObjWriter.h"
 
 int main()
-{   
-    ObjReader reader;
-    Triangulation tri;
+{
+    // Singleton instance for triangulation
+    Triangulation &triangulation = Triangulation::getInstance();
 
-    reader.readObj(tri);
-    ObjWriter writer;
-    writer.writeOBJ(tri);
-    return 1;
+    // Singleton instance for ObjReader
+    ObjReader &reader = ObjReader::getInstance();
+    reader.readObj(triangulation);
 
+    // Singleton instance for ObjWriter
+    ObjWriter &writer = ObjWriter::getInstance();
+    writer.writeOBJ(triangulation);
+
+    return 0;
 }

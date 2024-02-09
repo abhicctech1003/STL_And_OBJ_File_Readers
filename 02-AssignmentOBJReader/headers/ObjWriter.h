@@ -1,10 +1,18 @@
 #pragma once
-#include <vector>
-#include "Triangle.h"
-#include"Triangulation.h"
- 
+#include "Triangulation.h"
+
 class ObjWriter
 {
     public:
-        void writeOBJ(Triangulation &triangulation);
+        // singleton static method
+        static ObjWriter& getInstance();
+
+        void writeOBJ(Triangulation& triangulation);
+
+    private:
+        // Private constructor for singleton class
+        ObjWriter();
+
+        // Singleton instance
+        static ObjWriter instance;
 };

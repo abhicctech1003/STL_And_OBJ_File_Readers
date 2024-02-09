@@ -9,24 +9,45 @@
 
 using namespace std;
 
- 
-void ObjWriter::writeOBJ (Triangulation & triangulation)
+// Initialization of static member instance for singleton class
+ObjWriter ObjWriter::instance;
+
+// Static method for accessing the singleton instance
+ObjWriter& ObjWriter::getInstance() 
 {
-    std::ofstream outFile("Cube1.txt");
- 
-    if (!outFile.is_open())
+    return instance;
+}
+
+// To prevent outside initialization private constructor
+ObjWriter::ObjWriter() 
+{
+
+}
+
+// Method to write triangulation data to OBJ file
+void ObjWriter::writeOBJ(Triangulation& triangulation) 
+{
+    std::ofstream outFile("./textfiles/Cube.txt"); 
+
+    // Check if file is successfully opened
+    if (!outFile.is_open()) 
     {
-        cout << "Error while opening the file for writing." << endl;
+        // Error
+        std::cout << "File is not opening" << std::endl; 
+        return;
     }
- 
-    vector<Point3D> &points = triangulation.uniquePoints();
-   
-    vector<Triangle> &triangles = triangulation.triangles();
-    for (const Triangle &triangle : triangles)
+
+    // Get reference to vector of unique points
+    std::vector<Point3D>& points = triangulation.uniquePoints(); 
+
+    // Get reference to vector of triangles
+    std::vector<Triangle>& triangles = triangulation.triangles(); 
+
+    for (const Triangle& triangle : triangles)
     {
-        outFile << points[triangle.v1()-1].x() << " " << points[triangle.v1()-1].y() << " " << points[triangle.v1()-1].z() << endl;
-        outFile << points[triangle.v2()-1].x() << " " << points[triangle.v2()-1].y() << " " << points[triangle.v2()-1].z() << endl;
-        outFile << points[triangle.v3()-1].x() << " " << points[triangle.v3()-1].y() << " " << points[triangle.v3()-1].z() << endl;
+        outFile << points[triangle.v1() - 1].x() << " " << points[triangle.v1() - 1].y() << " " << points[triangle.v1() - 1].z() << std::endl;
+        outFile << points[triangle.v2() - 1].x() << " " << points[triangle.v2() - 1].y() << " " << points[triangle.v2() - 1].z() << std::endl;
+        outFile << points[triangle.v3() - 1].x() << " " << points[triangle.v3() - 1].y() << " " << points[triangle.v3() - 1].z() << std::endl;
     }
     outFile.close();
 }

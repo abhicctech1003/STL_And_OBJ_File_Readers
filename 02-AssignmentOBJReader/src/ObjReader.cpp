@@ -1,65 +1,82 @@
-#include"../headers/ObjReader.h"
-#include"../headers/Triangulation.h"
-#include"../headers/Triangle.h"
-#include<iostream>
-#include<fstream>
-#include<sstream>
-#include<unordered_map>
-#include<map>
-#include<algorithm>
+#include "../headers/ObjReader.h"
+#include <fstream>
+#include <sstream>
 
-using namespace std ;
+// Initialization of static member instance for singleton class
+ObjReader ObjReader::instance;
 
-
-void ObjReader::readObj(Triangulation & triangulation)
+// Static method for accessing the singleton instance
+ObjReader& ObjReader::getInstance() 
 {
-        vector<Point3D> points;
-        vector<Triangle> triangles;
+    return instance;
+}
 
-        ifstream inputfile("Cube.obj");
-        string line;
-        int vertexindex = 0 ;
-        while(getline(inputfile,line))   // Reading the file
-        {       
-            if(line.find("v")!= string::npos) //Taking inputs of v as vertices
-            {
-                double x, y, z;
-                istringstream iss(line);
-                string keyword;
-                iss >> keyword >> x >> y >> z;
+// To prevent outside initialization private constructor
+ObjReader::ObjReader() 
+{
 
-                if (keyword == "v")
-                {
-                    Point3D p1(x, y, z);
-                    points.push_back(p1);
-                }
-            }
-            
-            if(line.find("f")!= string::npos) // Checking the face values
+}
+
+// Perform triangulation and read obj
+void ObjReader::readObj(Triangulation& triangulation)
+ {
+    std::vector<Point3D> points;
+    std::vector<Triangle> triangles;
+
+    std::ifstream inputfile("objfile\\cube.obj");
+    std::string line;
+
+    while (std::getline(inputfile, line)) 
+    {
+        if (line.find("v") != std::string::npos) 
+        {
+            double x, y, z;
+            std::istringstream singleline(line);
+            std::string keyword;
+            singleline >> keyword >> x >> y >> z;
+            if (keyword == "v") 
             {
-                string x, y, z;
-                istringstream iss(line);
-                string keyword;
-                iss >> keyword >> x >> y >> z;
-             
-                if(keyword == "f")
-                {
-                       
-                    int v1,v2,v3;               //converting string into int using ASCII
-                    v1 = x[0]; v1-=48;
-                    v2 = y[0]; v2-=48;
-                    v3 = z[0]; v3-=48;
-                    
-                    Triangle T(v1,v2,v3);
-                    triangles.push_back(T);
-                   
-                }        
+                Point3D P1(x, y, z);
+                points.push_back(P1);
             }
         }
-           
-     
-    triangulation.triangles() = triangles;
-    triangulation.uniquePoints() =  points;
 
-inputfile.close();
+        if (line.find("f") != std::string::npos) 
+        {
+            std::istringstream singleLine(line);
+            std::string keyword;
+            singleLine >> keyword;
+
+            if (keyword == "f")
+             {
+                std::vector<int> vertices;
+                std::string token;
+                while (singleLine >> token)
+                 {
+                    // Split the token by '/'
+                    std::istringstream tokenStream(token);
+                    std::string subtoken;
+                    while (std::getline(tokenStream, subtoken, '/'))
+                    {
+                        // Convert substring to integer and push it to vertices
+                        vertices.push_back(std::stoi(subtoken));
+                    }
+                }
+
+                // Extract first values
+                int v1 = vertices[0];
+                int v2 = vertices[3];
+                int v3 = vertices[6];
+
+                Triangle T(v1, v2, v3);
+                triangles.push_back(T);
+            }
+        }
+    }
+
+    // Populated vectors assigned to Triangulation object
+    triangulation.triangles() = triangles;
+    triangulation.uniquePoints() = points;
+
+    inputfile.close();
 }
