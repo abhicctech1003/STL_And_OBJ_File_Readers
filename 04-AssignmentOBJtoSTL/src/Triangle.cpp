@@ -1,12 +1,18 @@
 #include "../headers/Triangle.h"
 
-Triangle::Triangle() : mV1(), mV2(), mV3() {}
+Triangle::Triangle() : mV1(), mV2(), mV3()
+{
 
-Triangle::Triangle(int v1, int v2, int v3)
+}
+
+Triangle::Triangle(int v1, int v2, int v3,int Normal)
 {
     mV1 = v1;
     mV2 = v2;
     mV3 = v3;
+    mNormal=Normal;
+   
+    
 }
 
 const int Triangle::v1() const
@@ -22,6 +28,11 @@ const int Triangle::v2() const
 const int Triangle::v3() const
 {
     return mV3;
+}
+
+const int Triangle :: normalOfTriangle() const
+{
+    return mNormal;
 }
 
 void Triangle::setV1(const int v1)

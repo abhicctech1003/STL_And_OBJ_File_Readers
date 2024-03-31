@@ -1,22 +1,22 @@
 #pragma once
-#include "Triangle.h"
 #include <vector>
+#include "Triangle.h"
 using namespace std;
 
-namespace Shapes3D
+class Triangulation
 {
-    class Triangulation
-    {
     public:
         Triangulation();
         ~Triangulation();
 
-        // Triangulation triangulation();
-        vector<Point3D> &uniquePoints();
         vector<Triangle> &triangles();
+        vector<Point3D> &uniquePoints();
+        vector<Point3D> &uniqueNormal();
+        void printtriangles();
 
     private:
-        vector<Point3D> mUniquePoints;
         vector<Triangle> mTriangles;
-    };
-}
+        vector<Point3D> mUniquePoints;
+        vector<Point3D>mUniqueNormal;
+
+};

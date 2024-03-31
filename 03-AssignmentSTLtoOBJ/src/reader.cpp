@@ -5,20 +5,18 @@
 #include <iostream>
 #include <map>
 #include "../headers/Point3D.h"
-#include "../headers/STLReader.h"
+#include "../headers/reader.h"
 #include "../headers/Triangle.h"
 #include "../headers/Triangulation.h"
-
 using namespace std;
 
 reader ::reader()
 {
 
 }
-
 reader ::~reader()
 {
-    
+
 }
 
 void reader ::readFile1(Triangulation &triangualtion)
@@ -50,17 +48,17 @@ void reader ::readFile1(Triangulation &triangualtion)
                 string token1;
                 string token2;
                 facetNormal >> token1 >> token2 >> x >> y >> z;
-                
+                // Point3D object created
                 Point3D point(x, y, z);
 
-                // find poiint is in map or not
+                // Find point is in map or not
                 auto iterator = mappedNormals.find(point);
 
                 // Add unique points if not found in map
                 if (iterator == mappedNormals.end())
                 {
-                    mappedNormals[point] = triangualtion. uniqueNormal().size();
-                    triangualtion. uniqueNormal().push_back(point);
+                    mappedNormals[point] = triangualtion.uniqueNormal().size();
+                    triangualtion.uniqueNormal().push_back(point);
                 }
 
                 normalIndex = mappedNormals[point];
@@ -73,17 +71,16 @@ void reader ::readFile1(Triangulation &triangualtion)
                 double x, y, z;
 
                 vertexStream >> token >> x >> y >> z;
-               
+                // x,y,z stored into object of Point3D
                 Point3D point(x, y, z);
 
-              
                 auto it = mapppedPoint3D.find(point);
 
                 if (it == mapppedPoint3D.end())
                 {
-                    triangualtion. uniquePoints().push_back(point);
+                    triangualtion.uniquePoints().push_back(point);
 
-                    mapppedPoint3D[point] = triangualtion. uniquePoints().size();
+                    mapppedPoint3D[point] = triangualtion.uniquePoints().size();
                 }
                 if (numberOfVertex == 1)
                 {
@@ -102,10 +99,11 @@ void reader ::readFile1(Triangulation &triangualtion)
                     numberOfVertex++;
                 }
             }
+
             if (numberOfVertex == 4)
             {
 
-                Triangle T(v1-1, v2-1, v3-1, normalIndex-1);
+                Triangle T(v1, v2, v3, normalIndex);
                 triangualtion.triangles().push_back(T);
                 numberOfVertex = 1;
             }

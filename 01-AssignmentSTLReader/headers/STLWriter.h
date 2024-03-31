@@ -1,15 +1,11 @@
 #pragma once
 #include "../headers/Triangulation.h"
-#include <string>
 
-namespace Shapes3D
+class writer
 {
-    class STLWriter
-    {
     public:
-        STLWriter();
-        ~STLWriter();
+    writer();
+    ~writer();
+    void  writerStl(Triangulation &triangulation);
 
-        Triangulation writeSTL(std::string &filePath, Triangulation &triangulationObj);
-    };
-}
+};

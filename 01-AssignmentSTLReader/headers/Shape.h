@@ -5,8 +5,7 @@ class Shape
     public:
         Shape();
         ~Shape();
-        
-    protected:
+        protected:
         virtual void plot() = 0;
         virtual float perimeter()=0;
 };

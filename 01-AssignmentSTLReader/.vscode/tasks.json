@@ -1,4 +1,4 @@
-    {
+{
     "version": "2.0.0",
     "tasks": [
         {
@@ -8,13 +8,13 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}\\src\\*.cpp", // this line replaces the need to add each .cpp file individually
-                "${workspaceFolder}\\main.cpp", 
+                "${workspaceFolder}/*.cpp",
+                "${workspaceFolder}/src/*.cpp",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "${workspaceFolder}\\output\\output.exe"
             ],
             "options": {
-                "cwd": "${workspaceFolder}\\src"
+                "cwd": "${fileDirname}"
             },
             "problemMatcher": [
                 "$gcc"

@@ -4,7 +4,7 @@ class Point2D
 {
     public:
         Point2D();
-        Point2D(float xCordinate,float yCordinate);
+         Point2D(float xCordinate,float yCordinate);
         ~Point2D();
 
     public:

@@ -1,25 +1,55 @@
 #include "../headers/Point3D.h"
-using namespace Shapes3D;
 
-Point3D::Point3D() : mX(), mY(), mZ() {}
-Point3D::Point3D(double x, double y, double z) : mX(x), mY(y), mZ(z) {}
-Point3D::~Point3D() {}
+Point3D ::Point3D()
+{
+    mX = 0.0;
+    mY = 0.0;
+    mZ = 0.0;
+}
 
-double Point3D::x() const
+Point3D ::Point3D(float inX, float inY, float inZ)
+{
+    mX = inX;
+    mY = inY;
+    mZ = inZ;
+}
+
+Point3D ::~Point3D()
+{
+
+}
+
+float Point3D ::x()
 {
     return mX;
 }
 
-double Point3D::y() const
+float Point3D ::y()
 {
     return mY;
 }
 
-double Point3D::z() const
+float Point3D ::z()
 {
     return mZ;
 }
 
+void Point3D ::setX(float x)
+{
+    mX = x;
+}
+
+void Point3D ::setY(float y)
+{
+    mY = y;
+}
+
+void Point3D ::setZ(float z)
+{
+    mZ = z;
+}
+
+// Operator Overloading
 bool Point3D::operator<(const Point3D &other) const
 {
     if (mX < other.mX)
@@ -33,9 +63,4 @@ bool Point3D::operator<(const Point3D &other) const
         return false;
 
     return mZ < other.mZ;
-
-    // if ((this->mX() == p2.x()) && (p1.y() == p2.y()) && p1.z() < p2.z())
-    // {
-    //     return true;
-    // }
 }
