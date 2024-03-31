@@ -1,25 +1,24 @@
 #pragma once
 #include "Point3D.h"
-namespace Shapes3D
+#include "Shape.h"
+
+class Triangle
 {
-    class Triangle
-    {
     public:
         Triangle();
-        Triangle(const int ind1, const int ind2, const int ind3);
+   
+        Triangle(int inV1,int inV2 ,int inV3,int inNormal);
         ~Triangle();
-
-        int index1() const;
-        int index2() const;
-        int index3() const;
-
-        void setindex1(int ind1);
-        void setindex2(int ind2);
-        void setindex3(int ind3);
+    
+        const int v1() const;
+        const int v2() const;
+        const int v3() const;
+        const int normalOfTriangle()const;
 
     private:
-        int mIndex1;
-        int mIndex2;
-        int mIndex3;
-    };
-}
+        int mV1;
+        int mV2;
+        int mV3;
+        int mNormal;
+   
+};

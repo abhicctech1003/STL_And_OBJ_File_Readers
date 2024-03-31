@@ -1,34 +1,45 @@
+
 #include "../headers/STLWriter.h"
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <vector>
+#include "../headers/Point3D.h"
 using namespace std;
-using namespace Shapes3D;
 
-STLWriter::STLWriter() {}
-STLWriter::~STLWriter() {}
-
-Triangulation STLWriter::writeSTL(std::string &filePath, Triangulation &triangulationObj)
+writer ::writer()
 {
-    ofstream outFile(filePath);
+
+}
+
+writer ::~writer()
+{
+
+}
+
+void writer ::writerStl(Triangulation &triangulation)
+{
+
+    ofstream outFile("cube.txt");
 
     if (!outFile.is_open())
     {
-        cout << "Error while opening the file for writing." << endl;
+        cout << "Error while opening text file." << endl;
+        return;
     }
 
-    vector<Point3D> &points = triangulationObj.uniquePoints();
-    vector<Triangle> &triangles = triangulationObj.triangles();
-    // for (const Point3D &point : points)
-    // {
-    //     outFile << point.x() << " " << point.y() << " " << point.z() << endl;
-    // }
+    vector<Point3D> &points = triangulation.uniquePoints();
+    vector<Point3D> &Normal = triangulation.uniqueNormal();
+    vector<Triangle> &triangles = triangulation.triangles();
+
+    
 
     for (const Triangle &triangle : triangles)
     {
-        outFile << points[triangle.index1()].x() << " " << points[triangle.index1()].y() << " " << points[triangle.index1()].z() << endl;
-        // outFile << points[triangle.index2()].x() << " " << points[triangle.index2()].y() << " " << points[triangle.index2()].z() << endl;
-        // outFile << points[triangle.index3()].x() << " " << points[triangle.index3()].y() << " " << points[triangle.index3()].z() << endl;
+        // Put triangle vertices to STL file
+        outFile <<points[triangle.v1()].x() << " " << points[triangle.v1()].y() << " " << points[triangle.v1()].z() << endl;
+        outFile <<points[triangle.v2()].x() << " " << points[triangle.v2()].y() << " " << points[triangle.v2()].z() << endl;
+        outFile <<points[triangle.v3()].x() << " " << points[triangle.v3()].y() << " " << points[triangle.v3()].z() << endl;
     }
     outFile.close();
-    return triangulationObj;
 }

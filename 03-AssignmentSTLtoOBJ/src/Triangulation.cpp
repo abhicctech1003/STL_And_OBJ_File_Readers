@@ -3,11 +3,11 @@
 #include<vector>
 #include<iostream>
 
-
 Triangulation::Triangulation()
 {
 
 }
+
 Triangulation::~Triangulation()
 {
     
@@ -21,4 +21,9 @@ vector<Triangle> & Triangulation::triangles()
 vector<Point3D> & Triangulation::uniquePoints()
 {
     return mUniquePoints;
+}
+
+vector<Point3D> & Triangulation::uniqueNormal()
+{
+    return mUniqueNormal;
 }

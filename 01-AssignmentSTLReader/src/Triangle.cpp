@@ -1,36 +1,39 @@
 #include "../headers/Triangle.h"
-using namespace Shapes3D;
 
-Triangle::Triangle() {}
-Triangle::Triangle(const int ind1, const int ind2, const int ind3) : mIndex1(ind1), mIndex2(ind2), mIndex3(ind3) {}
-Triangle::~Triangle() {}
+using namespace std;
 
-int Triangle::index1() const
+Triangle ::Triangle()
 {
-    return mIndex1;
 }
 
-int Triangle::index2() const
+Triangle ::~Triangle()
 {
-    return mIndex2;
 }
 
-int Triangle::index3() const
+const int Triangle ::v1() const
 {
-    return mIndex3;
+    return mV1;
 }
 
-void Triangle::setindex1(int ind1)
+const int Triangle ::v2() const
 {
-    mIndex1 = ind1;
+    return mV2;
 }
 
-void Triangle::setindex2(int ind2)
+const int Triangle ::v3() const
 {
-    mIndex2 = ind2;
+    return mV3;
 }
 
-void Triangle::setindex3(int ind3)
+const int Triangle ::normalOfTriangle() const
 {
-    mIndex3 = ind3;
+    return mNormal;
+}
+
+Triangle ::Triangle(int v1, int v2, int v3, int Normal)
+{
+    mV1 = v1;
+    mV2 = v2;
+    mV3 = v3;
+    mNormal = Normal;
 }

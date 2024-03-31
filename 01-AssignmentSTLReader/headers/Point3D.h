@@ -1,26 +1,21 @@
 #pragma once
-namespace Shapes3D
+
+class Point3D
 {
-    class Point3D
-    {
     public:
         Point3D();
-        Point3D(double x, double y, double z);
+        Point3D(float inX, float inY, float inZ);
         ~Point3D();
-
-        double x() const;
-        double y() const;
-        double z() const;
+        float x();
+        float y();
+        float z();
+        void setX(float x);
+        void setY(float y);
+        void setZ(float z);
         bool operator<(const Point3D &other) const;
 
-        // struct Comparator
-        // {
-        //     bool operator()(const Point3D &lhs, const Point3D &rhs) const;
-        // };
-
     private:
-        double mX;
-        double mY;
-        double mZ;
-    };
-}
+        float mX;
+        float mY;
+        float mZ;
+};

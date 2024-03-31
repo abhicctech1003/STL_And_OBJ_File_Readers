@@ -1,28 +1,22 @@
+#include <fstream>
 #include <iostream>
-#include "./headers/Triangulation.h"
-#include "./headers/Triangle.h"
+#include <cmath>
 #include "./headers/STLReader.h"
 #include "./headers/STLWriter.h"
 
-using namespace Shapes3D;
-typedef vector<Triangle> Triangles;
+using namespace std;
 
 int main()
 {
-    std::string inputFilePath = "D:/rashmi_workspace/CPP/Project3_3DShapes_Triangulation/stlFiles/sphere.stl";
-    std::string outputFilePath = "outputTextFile.txt";
+  // created object of StlReader
+  reader readerObject;
 
-    // STLReader stlReader;
-    // stlReader.readSTL();
-    Shapes3D::STLReader stlReader;
-    Triangulation triangulation = stlReader.readSTL(inputFilePath);
+  // created object of Triangulation
+  Triangulation triangualtion;
+  readerObject.readFile1(triangualtion);
 
-    // Triangulation triangulation = stlReader.triangulation();
-    // Triangles triangles = triangulation.triangles();
-    // std::vector<Point3D> uniquePoints = triangulation.uniquePoints();
-
-    Shapes3D::STLWriter stlWriter;
-    stlWriter.writeSTL(outputFilePath, triangulation);
-
-    return 0;
+  // created object of StlObj
+  writer writerObj;
+  writerObj.writerStl(triangualtion);
+  return 0;
 }
